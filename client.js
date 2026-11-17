@@ -117,25 +117,42 @@ window.__ModuleLoader__.load({
 
         // Wallpaper backdrop: light「白天晴朗」for the light palette, rainy
         // night「雨夜 NIGHTCODE」for the dark palette (body[data-ds-dark-theme]).
+        // Two paint paths on purpose: a body background-image (plain, no
+        // attachment) plus a page-level fixed layer. A body image with
+        // `background-attachment: fixed` is unreliable inside transparent
+        // macOS vibrancy windows, where Chromium may skip painting it.
         ctx.effect(() => {
           if (typeof document === 'undefined') return undefined;
           const style = document.createElement('style');
           style.dataset.meraWallpaper = '';
           style.textContent = [
             'html, body {',
+            `  --mera-wallpaper: url("${WALLPAPER.light}");`,
             `  background-image: url("${WALLPAPER.light}");`,
             '  background-size: cover;',
             '  background-position: center;',
             '  background-repeat: no-repeat;',
-            '  background-attachment: fixed;',
             '}',
             'body[data-ds-dark-theme] {',
+            `  --mera-wallpaper: url("${WALLPAPER.dark}");`,
             `  background-image: url("${WALLPAPER.dark}");`,
             '}',
           ].join('\n');
           document.head.appendChild(style);
-          return () => { style.remove(); };
-        }, 'mera-theme: wallpaper stylesheet');
+
+          const layer = document.createElement('div');
+          layer.setAttribute('aria-hidden', 'true');
+          layer.dataset.meraWallpaper = '';
+          layer.style.cssText = 'position:fixed;inset:0;z-index:-1;pointer-events:none;'
+            + 'background-image:var(--mera-wallpaper);background-size:cover;'
+            + 'background-position:center;background-repeat:no-repeat;';
+          document.body.appendChild(layer);
+
+          return () => {
+            layer.remove();
+            style.remove();
+          };
+        }, 'mera-theme: wallpaper layer');
       },
     };
   },
