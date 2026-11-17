@@ -25,19 +25,20 @@ window.__ModuleLoader__.load({
     // translucent so the wallpaper reads through the panels while text stays
     // on a calm, low-noise ground.
     const MERA_TOKENS = {
-      // Surfaces (translucent over the wallpaper)
-      '--dsw-alias-bg-base': { light: 'rgba(253, 250, 251, 0.62)', dark: 'rgba(16, 20, 31, 0.58)' },
-      '--dsw-alias-bg-layer-1': { light: 'rgba(255, 255, 255, 0.72)', dark: 'rgba(22, 28, 44, 0.74)' },
-      '--dsw-alias-bg-layer-2': { light: 'rgba(255, 255, 255, 0.82)', dark: 'rgba(27, 34, 52, 0.84)' },
-      '--dsw-alias-bg-overlay': { light: 'rgba(248, 238, 241, 0.88)', dark: 'rgba(39, 48, 72, 0.88)' },
-      '--dsw-alias-bg-module-platform': { light: 'rgba(249, 243, 245, 0.74)', dark: 'rgba(26, 33, 51, 0.76)' },
-      '--dsw-alias-bg-multi-select': { light: 'rgba(249, 243, 245, 0.74)', dark: 'rgba(28, 36, 54, 0.78)' },
-      '--dsw-specific-selector': { light: 'rgba(248, 241, 243, 0.74)', dark: 'rgba(29, 37, 56, 0.76)' },
-      '--dsw-specific-tip': { light: 'rgba(248, 241, 243, 0.74)', dark: 'rgba(29, 37, 56, 0.76)' },
-      '--dsw-specific-input-major': { light: 'rgba(255, 255, 255, 0.88)', dark: 'rgba(23, 30, 47, 0.86)' },
-      '--dsw-specific-login-input': { light: 'rgba(255, 255, 255, 0.88)', dark: 'rgba(19, 26, 41, 0.88)' },
-      '--dsw-alias-card-fill': { light: 'rgba(251, 246, 247, 0.80)', dark: 'rgba(24, 31, 48, 0.80)' },
-      '--dsw-alias-card-fill-hover': { light: 'rgba(247, 238, 241, 0.90)', dark: 'rgba(30, 38, 57, 0.88)' },
+      // Surfaces (translucent over the wallpaper; base is a near-transparent
+      // veil so the artwork is the canvas and panels only lightly tint it)
+      '--dsw-alias-bg-base': { light: 'rgba(253, 250, 251, 0.10)', dark: 'rgba(16, 20, 31, 0.15)' },
+      '--dsw-alias-bg-layer-1': { light: 'rgba(255, 255, 255, 0.42)', dark: 'rgba(22, 28, 44, 0.48)' },
+      '--dsw-alias-bg-layer-2': { light: 'rgba(255, 255, 255, 0.52)', dark: 'rgba(27, 34, 52, 0.58)' },
+      '--dsw-alias-bg-overlay': { light: 'rgba(248, 238, 241, 0.78)', dark: 'rgba(39, 48, 72, 0.78)' },
+      '--dsw-alias-bg-module-platform': { light: 'rgba(249, 243, 245, 0.50)', dark: 'rgba(26, 33, 51, 0.55)' },
+      '--dsw-alias-bg-multi-select': { light: 'rgba(249, 243, 245, 0.50)', dark: 'rgba(28, 36, 54, 0.55)' },
+      '--dsw-specific-selector': { light: 'rgba(248, 241, 243, 0.52)', dark: 'rgba(29, 37, 56, 0.56)' },
+      '--dsw-specific-tip': { light: 'rgba(248, 241, 243, 0.52)', dark: 'rgba(29, 37, 56, 0.56)' },
+      '--dsw-specific-input-major': { light: 'rgba(255, 255, 255, 0.62)', dark: 'rgba(23, 30, 47, 0.64)' },
+      '--dsw-specific-login-input': { light: 'rgba(255, 255, 255, 0.62)', dark: 'rgba(19, 26, 41, 0.64)' },
+      '--dsw-alias-card-fill': { light: 'rgba(251, 246, 247, 0.50)', dark: 'rgba(24, 31, 48, 0.55)' },
+      '--dsw-alias-card-fill-hover': { light: 'rgba(247, 238, 241, 0.62)', dark: 'rgba(30, 38, 57, 0.66)' },
       '--dsw-alias-card-tile-fill': { light: 'color-mix(in srgb, #FFFFFF 55%, transparent)', dark: 'color-mix(in srgb, #FFFFFF 6%, transparent)' },
       // Brand: raspberry rose
       '--dsw-alias-brand-primary': { light: '#FF3670', dark: '#FF3670' },
@@ -65,21 +66,21 @@ window.__ModuleLoader__.load({
       '--dsw-alias-border-selected': { light: '#FF7AA0', dark: '#FF7AA0' },
       '--dsw-alias-interactive-bg-active': { light: 'rgba(255, 54, 112, 0.12)', dark: 'rgba(255, 92, 138, 0.18)' },
       '--dsw-alias-interactive-bg-hover-accent': { light: 'rgba(255, 54, 112, 0.14)', dark: 'rgba(255, 92, 138, 0.22)' },
-      // Sidebar (more translucent, like a glass column over the wallpaper)
-      '--dsw-specific-sidebar-fill': { light: 'rgba(249, 242, 244, 0.62)', dark: 'rgba(12, 16, 26, 0.58)' },
-      '--dsw-specific-sidebar-nav-item-active': { light: 'rgba(243, 230, 235, 0.82)', dark: 'rgba(33, 42, 64, 0.82)' },
+      // Sidebar (a light glass column over the wallpaper)
+      '--dsw-specific-sidebar-fill': { light: 'rgba(249, 242, 244, 0.35)', dark: 'rgba(12, 16, 26, 0.42)' },
+      '--dsw-specific-sidebar-nav-item-active': { light: 'rgba(243, 230, 235, 0.70)', dark: 'rgba(33, 42, 64, 0.75)' },
       '--dsw-specific-sidebar-nav-item-active-accent': { light: '#FFE0EB', dark: 'rgba(255, 54, 112, 0.22)' },
       '--dsw-specific-sidebar-right-flash': { light: '#FF3670', dark: '#FF5C8A' },
       // Conversation and code (solid where text lives)
-      '--dsw-specific-bubble': { light: 'rgba(255, 236, 242, 0.92)', dark: 'rgba(51, 32, 47, 0.92)' },
-      '--dsw-specific-bubble-highlight': { light: 'rgba(255, 215, 228, 0.95)', dark: 'rgba(67, 42, 60, 0.95)' },
+      '--dsw-specific-bubble': { light: 'rgba(255, 236, 242, 0.88)', dark: 'rgba(51, 32, 47, 0.88)' },
+      '--dsw-specific-bubble-highlight': { light: 'rgba(255, 215, 228, 0.92)', dark: 'rgba(67, 42, 60, 0.92)' },
       '--dsw-alias-markdown-code-block': { light: '#F8F3F5', dark: '#131A2A' },
       '--dsw-alias-markdown-code-block-banner': { light: '#FBF7F8', dark: '#161D2E' },
       '--dsw-alias-markdown-inline-code': { light: '#FAF5F7', dark: '#1C2436' },
       '--dsw-alias-markdown-citation': { light: '#F5EDEF', dark: '#1A2234' },
       '--dsw-alias-markdown-tag': { light: '#F7EDF1', dark: '#1A2234' },
       '--dsw-alias-markdown-placeholder': { light: '#F6EFF2', dark: '#181F30' },
-      '--dsw-alias-turn-trigger-bg': { light: '#F8F3F5', dark: '#161D2E' },
+      '--dsw-alias-turn-trigger-bg': { light: 'rgba(248, 243, 245, 0.55)', dark: 'rgba(22, 29, 46, 0.60)' },
       '--dsw-alias-trajectory-accent': { light: '#FF3670', dark: '#FF5C8A' },
       // Charts (diagram persona)
       '--dsw-alias-chart-messages': { light: '#FF5C8A', dark: '#FF5C8A' },
