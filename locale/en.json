@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "MERA theme · Diagram Mermaid",
+    "description": "Applies the MERA persona palette (the Mermaid.js gijinka 'MERA'): raspberry rose #FF3670, pearl white, and ink navy #111827, in matching light and dark variants. Compatible with the Light, Dark, and System appearance choices; turning the plugin off restores the built-in colors.",
+    "detail": "docs/DETAIL.md"
+  }
+}

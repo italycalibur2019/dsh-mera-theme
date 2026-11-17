@@ -1,0 +1,69 @@
+<svg width="640" height="300" viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="mera-dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#808080" opacity="0.18"/>
+    </pattern>
+  </defs>
+
+  <!-- faint infinite-canvas dot grid -->
+  <rect x="0" y="0" width="640" height="300" fill="url(#mera-dots)"/>
+
+  <!-- git-branch line with nodes -->
+  <line x1="56" y1="36" x2="584" y2="36" stroke="rgba(17,24,39,0.18)" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="120" cy="36" r="4" fill="#FF3670"/>
+  <circle cx="320" cy="36" r="4" fill="none" stroke="#FF3670" stroke-width="2"/>
+  <rect x="406" y="32" width="8" height="8" transform="rotate(45 410 36)" fill="#FF7AA0"/>
+  <circle cx="500" cy="36" r="4" fill="#FF3670"/>
+
+  <!-- ===== left card: MERA light mock ===== -->
+  <rect x="40" y="60" width="250" height="190" rx="16" fill="#FDFAFB" stroke="rgba(17,24,39,0.08)"/>
+  <rect x="56" y="76" width="48" height="158" rx="8" fill="#F9F2F4"/>
+  <rect x="62" y="86" width="36" height="10" rx="3" fill="#F3E6EB"/>
+  <rect x="62" y="102" width="36" height="10" rx="3" fill="#F3E6EB"/>
+  <rect x="62" y="118" width="36" height="10" rx="3" fill="#FFE0EB"/>
+  <circle cx="66" cy="123" r="2" fill="#FF3670"/>
+  <rect x="116" y="76" width="158" height="22" rx="8" fill="#FFECF2"/>
+  <rect x="126" y="84" width="90" height="5" rx="2.5" fill="#FFD7E4"/>
+  <rect x="116" y="106" width="158" height="62" rx="8" fill="#FFFFFF" stroke="rgba(17,24,39,0.06)"/>
+  <!-- mini flowchart (assistant answer) -->
+  <line x1="140" y1="126" x2="196" y2="112" stroke="#566074" stroke-width="1.5" opacity="0.45" stroke-linecap="round"/>
+  <line x1="140" y1="126" x2="196" y2="142" stroke="#566074" stroke-width="1.5" opacity="0.45" stroke-linecap="round"/>
+  <line x1="196" y1="112" x2="252" y2="126" stroke="#566074" stroke-width="1.5" opacity="0.45" stroke-linecap="round"/>
+  <line x1="196" y1="142" x2="252" y2="126" stroke="#566074" stroke-width="1.5" opacity="0.45" stroke-linecap="round"/>
+  <circle cx="140" cy="126" r="6" fill="#FF3670"/>
+  <circle cx="196" cy="112" r="6" fill="#FFFFFF" stroke="#DB2763" stroke-width="2"/>
+  <circle cx="196" cy="142" r="6" fill="#FFFFFF" stroke="#DB2763" stroke-width="2"/>
+  <circle cx="252" cy="126" r="6" fill="#FF7AA0"/>
+  <rect x="116" y="216" width="158" height="20" rx="10" fill="#FFFFFF" stroke="rgba(17,24,39,0.10)"/>
+  <circle cx="264" cy="226" r="7" fill="#FF3670"/>
+
+  <!-- ===== right card: MERA dark mock ===== -->
+  <rect x="350" y="60" width="250" height="190" rx="16" fill="#161C2C" stroke="rgba(255,255,255,0.10)"/>
+  <rect x="366" y="76" width="48" height="158" rx="8" fill="#0C101A"/>
+  <rect x="372" y="86" width="36" height="10" rx="3" fill="#212A40"/>
+  <rect x="372" y="102" width="36" height="10" rx="3" fill="#212A40"/>
+  <rect x="372" y="118" width="36" height="10" rx="3" fill="#FF3670" opacity="0.22"/>
+  <circle cx="376" cy="123" r="2" fill="#FF5C8A"/>
+  <rect x="426" y="76" width="158" height="22" rx="8" fill="#33202F"/>
+  <rect x="436" y="84" width="90" height="5" rx="2.5" fill="#432A3C"/>
+  <rect x="426" y="106" width="158" height="62" rx="8" fill="#1E2639"/>
+  <!-- mini flowchart (assistant answer) -->
+  <line x1="450" y1="126" x2="506" y2="112" stroke="#AEB8CB" stroke-width="1.5" opacity="0.35" stroke-linecap="round"/>
+  <line x1="450" y1="126" x2="506" y2="142" stroke="#AEB8CB" stroke-width="1.5" opacity="0.35" stroke-linecap="round"/>
+  <line x1="506" y1="112" x2="562" y2="126" stroke="#AEB8CB" stroke-width="1.5" opacity="0.35" stroke-linecap="round"/>
+  <line x1="506" y1="142" x2="562" y2="126" stroke="#AEB8CB" stroke-width="1.5" opacity="0.35" stroke-linecap="round"/>
+  <circle cx="450" cy="126" r="6" fill="#FF5C8A"/>
+  <circle cx="506" cy="112" r="6" fill="#161C2C" stroke="#FF7AA0" stroke-width="2"/>
+  <circle cx="506" cy="142" r="6" fill="#161C2C" stroke="#FF7AA0" stroke-width="2"/>
+  <circle cx="562" cy="126" r="6" fill="#FF7AA0"/>
+  <rect x="426" y="216" width="158" height="20" rx="10" fill="#171E2F" stroke="rgba(255,255,255,0.12)"/>
+  <circle cx="574" cy="226" r="7" fill="#FF3670"/>
+
+  <!-- ===== center: MERA badge bridging both themes ===== -->
+  <rect x="288" y="118" width="64" height="64" rx="18" fill="#FF3670"/>
+  <g transform="translate(273.2 107.49) scale(2.6)" fill="#FFFFFF">
+    <path d="M18 11.4 C19.5 13.4 19.8 15.5 19.1 17.9 C19.05 18.2 19 18.5 19 18.8 L17 18.8 C17 18.5 16.95 18.2 16.9 17.9 C16.2 15.5 16.5 13.4 18 11.4 Z"/>
+    <path d="M17.6 18.6 C16.2 17.3 14.2 16.9 12.5 17.7 C13.5 18.5 13.9 19.5 13.7 20.7 C15.2 21.3 16.8 20.9 17.6 19.6 Z"/>
+    <path d="M18.4 18.6 C19.8 17.3 21.8 16.9 23.5 17.7 C22.5 18.5 22.1 19.5 22.3 20.7 C20.8 21.3 19.2 20.9 18.4 19.6 Z"/>
+  </g>
+</svg>
