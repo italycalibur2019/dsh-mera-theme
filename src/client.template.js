@@ -175,14 +175,16 @@ window.__ModuleLoader__.load({
             '  -webkit-backdrop-filter: blur(18px) saturate(1.15);',
             '  backdrop-filter: blur(18px) saturate(1.15);',
             '}',
-            // Frosted left sidebar (Windows/Linux; macOS keeps its native
-            // vibrancy). The blur rides a pseudo-element: putting
-            // backdrop-filter on the column itself would make it the containing
-            // block for the fixed-position sidebar toggle and shift it.
-            'html:not([data-platform="darwin"]) [class*="sidebarCol"] {',
+            // Frosted left sidebar, all platforms: the wallpaper is an opaque
+            // page layer, so the blur reads the artwork (on macOS the native
+            // vibrancy sits behind it and is unaffected). The blur rides a
+            // pseudo-element: putting backdrop-filter on the column itself
+            // would make it the containing block for the fixed-position
+            // sidebar toggle and shift it.
+            '[class*="sidebarCol"] {',
             '  position: relative;',
             '}',
-            'html:not([data-platform="darwin"]) [class*="sidebarCol"]::before {',
+            '[class*="sidebarCol"]::before {',
             '  content: "";',
             '  position: absolute;',
             '  inset: 0;',
@@ -190,7 +192,8 @@ window.__ModuleLoader__.load({
             '  -webkit-backdrop-filter: blur(24px) saturate(1.25);',
             '  backdrop-filter: blur(24px) saturate(1.25);',
             '}',
-            // Frosted Windows caption strip (the frame paints it as ::before).
+            // Frosted Windows caption strip (the frame paints it as ::before;
+            // macOS has no page-painted caption row).
             'html[data-windows-titlebar] [class*="frame"]::before {',
             '  -webkit-backdrop-filter: blur(18px) saturate(1.2);',
             '  backdrop-filter: blur(18px) saturate(1.2);',
