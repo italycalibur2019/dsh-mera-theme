@@ -37,8 +37,8 @@ window.__ModuleLoader__.load({
       '--dsw-alias-bg-multi-select': { light: 'rgba(249, 243, 245, 0.80)', dark: 'rgba(28, 36, 54, 0.82)' },
       '--dsw-specific-selector': { light: 'rgba(248, 241, 243, 0.80)', dark: 'rgba(29, 37, 56, 0.82)' },
       '--dsw-specific-tip': { light: 'rgba(248, 241, 243, 0.80)', dark: 'rgba(29, 37, 56, 0.82)' },
-      '--dsw-specific-input-major': { light: 'rgba(255, 255, 255, 0.62)', dark: 'rgba(23, 30, 47, 0.64)' },
-      '--dsw-specific-login-input': { light: 'rgba(255, 255, 255, 0.62)', dark: 'rgba(19, 26, 41, 0.64)' },
+      '--dsw-specific-input-major': { light: 'rgba(255, 255, 255, 0.82)', dark: 'rgba(23, 30, 47, 0.84)' },
+      '--dsw-specific-login-input': { light: 'rgba(255, 255, 255, 0.82)', dark: 'rgba(19, 26, 41, 0.84)' },
       '--dsw-alias-card-fill': { light: 'rgba(251, 246, 247, 0.50)', dark: 'rgba(24, 31, 48, 0.55)' },
       '--dsw-alias-card-fill-hover': { light: 'rgba(247, 238, 241, 0.62)', dark: 'rgba(30, 38, 57, 0.66)' },
       '--dsw-alias-card-tile-fill': { light: 'color-mix(in srgb, #FFFFFF 55%, transparent)', dark: 'color-mix(in srgb, #FFFFFF 6%, transparent)' },
@@ -147,6 +147,13 @@ window.__ModuleLoader__.load({
             '}',
             'body[data-ds-dark-theme] [data-shortcut-modal="settings"] {',
             '  background: rgba(27, 34, 52, 0.97);',
+            '}',
+            // The composer capsule floats over the message scroller: content
+            // scrolling behind it must not read through the input, so the
+            // card frosts its backdrop (with a more opaque fill token too).
+            'body [data-composer-card] {',
+            '  -webkit-backdrop-filter: blur(18px) saturate(1.15);',
+            '  backdrop-filter: blur(18px) saturate(1.15);',
             '}',
           ].join('\n');
           document.head.appendChild(style);
