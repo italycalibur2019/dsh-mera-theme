@@ -26,15 +26,17 @@ window.__ModuleLoader__.load({
     // on a calm, low-noise ground.
     const MERA_TOKENS = {
       // Surfaces (translucent over the wallpaper; base is a near-transparent
-      // veil so the artwork is the canvas and panels only lightly tint it)
+      // veil so the artwork is the canvas). Raised/panel surfaces that carry
+      // text (cards, diffs, dialogs, inputs) stay near-opaque for readability;
+      // the conversation canvas paints bg-base, so the wallpaper still reads.
       '--dsw-alias-bg-base': { light: 'rgba(253, 250, 251, 0.10)', dark: 'rgba(16, 20, 31, 0.15)' },
-      '--dsw-alias-bg-layer-1': { light: 'rgba(255, 255, 255, 0.42)', dark: 'rgba(22, 28, 44, 0.48)' },
+      '--dsw-alias-bg-layer-1': { light: 'rgba(255, 255, 255, 0.92)', dark: 'rgba(22, 28, 44, 0.93)' },
       '--dsw-alias-bg-layer-2': { light: 'rgba(255, 255, 255, 0.93)', dark: 'rgba(27, 34, 52, 0.94)' },
-      '--dsw-alias-bg-overlay': { light: 'rgba(248, 238, 241, 0.78)', dark: 'rgba(39, 48, 72, 0.78)' },
-      '--dsw-alias-bg-module-platform': { light: 'rgba(249, 243, 245, 0.50)', dark: 'rgba(26, 33, 51, 0.55)' },
-      '--dsw-alias-bg-multi-select': { light: 'rgba(249, 243, 245, 0.50)', dark: 'rgba(28, 36, 54, 0.55)' },
-      '--dsw-specific-selector': { light: 'rgba(248, 241, 243, 0.52)', dark: 'rgba(29, 37, 56, 0.56)' },
-      '--dsw-specific-tip': { light: 'rgba(248, 241, 243, 0.52)', dark: 'rgba(29, 37, 56, 0.56)' },
+      '--dsw-alias-bg-overlay': { light: 'rgba(248, 238, 241, 0.88)', dark: 'rgba(39, 48, 72, 0.88)' },
+      '--dsw-alias-bg-module-platform': { light: 'rgba(249, 243, 245, 0.80)', dark: 'rgba(26, 33, 51, 0.82)' },
+      '--dsw-alias-bg-multi-select': { light: 'rgba(249, 243, 245, 0.80)', dark: 'rgba(28, 36, 54, 0.82)' },
+      '--dsw-specific-selector': { light: 'rgba(248, 241, 243, 0.80)', dark: 'rgba(29, 37, 56, 0.82)' },
+      '--dsw-specific-tip': { light: 'rgba(248, 241, 243, 0.80)', dark: 'rgba(29, 37, 56, 0.82)' },
       '--dsw-specific-input-major': { light: 'rgba(255, 255, 255, 0.62)', dark: 'rgba(23, 30, 47, 0.64)' },
       '--dsw-specific-login-input': { light: 'rgba(255, 255, 255, 0.62)', dark: 'rgba(19, 26, 41, 0.64)' },
       '--dsw-alias-card-fill': { light: 'rgba(251, 246, 247, 0.50)', dark: 'rgba(24, 31, 48, 0.55)' },
