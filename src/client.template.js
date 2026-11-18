@@ -29,7 +29,7 @@ window.__ModuleLoader__.load({
       // veil so the artwork is the canvas and panels only lightly tint it)
       '--dsw-alias-bg-base': { light: 'rgba(253, 250, 251, 0.10)', dark: 'rgba(16, 20, 31, 0.15)' },
       '--dsw-alias-bg-layer-1': { light: 'rgba(255, 255, 255, 0.42)', dark: 'rgba(22, 28, 44, 0.48)' },
-      '--dsw-alias-bg-layer-2': { light: 'rgba(255, 255, 255, 0.52)', dark: 'rgba(27, 34, 52, 0.58)' },
+      '--dsw-alias-bg-layer-2': { light: 'rgba(255, 255, 255, 0.93)', dark: 'rgba(27, 34, 52, 0.94)' },
       '--dsw-alias-bg-overlay': { light: 'rgba(248, 238, 241, 0.78)', dark: 'rgba(39, 48, 72, 0.78)' },
       '--dsw-alias-bg-module-platform': { light: 'rgba(249, 243, 245, 0.50)', dark: 'rgba(26, 33, 51, 0.55)' },
       '--dsw-alias-bg-multi-select': { light: 'rgba(249, 243, 245, 0.50)', dark: 'rgba(28, 36, 54, 0.55)' },
@@ -136,6 +136,15 @@ window.__ModuleLoader__.load({
             'body[data-ds-dark-theme] {',
             `  --mera-wallpaper: url("${WALLPAPER.dark}");`,
             `  background-image: url("${WALLPAPER.dark}");`,
+            '}',
+            // The settings dialog keeps a near-opaque surface: its text rows sit
+            // directly on the panel, so wallpaper showing through would hurt
+            // readability. It portals to body with this marker attribute.
+            'body [data-shortcut-modal="settings"] {',
+            '  background: rgba(255, 255, 255, 0.97);',
+            '}',
+            'body[data-ds-dark-theme] [data-shortcut-modal="settings"] {',
+            '  background: rgba(27, 34, 52, 0.97);',
             '}',
           ].join('\n');
           document.head.appendChild(style);
