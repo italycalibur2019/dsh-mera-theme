@@ -71,8 +71,8 @@ window.__ModuleLoader__.load({
       '--dsw-alias-border-l2': { light: 'rgba(17, 24, 39, 0.10)', dark: 'rgba(255, 255, 255, 0.13)' },
       // The right-side turn rail's unselected ticks read border-l4; the stock
       // 16%/20% weights disappear over the wallpaper in both modes.
-      '--dsw-alias-border-l3': { light: 'rgba(17, 24, 39, 0.20)', dark: 'rgba(255, 255, 255, 0.26)' },
-      '--dsw-alias-border-l4': { light: 'rgba(17, 24, 39, 0.40)', dark: 'rgba(255, 255, 255, 0.34)' },
+      '--dsw-alias-border-l3': { light: 'rgba(17, 24, 39, 0.24)', dark: 'rgba(255, 255, 255, 0.30)' },
+      '--dsw-alias-border-l4': { light: 'rgba(17, 24, 39, 0.55)', dark: 'rgba(255, 255, 255, 0.45)' },
       '--dsw-alias-border-selected': { light: '#FF7AA0', dark: '#FF7AA0' },
       '--dsw-alias-interactive-bg-active': { light: 'rgba(255, 54, 112, 0.12)', dark: 'rgba(255, 92, 138, 0.18)' },
       '--dsw-alias-interactive-bg-hover-accent': { light: 'rgba(255, 54, 112, 0.14)', dark: 'rgba(255, 92, 138, 0.22)' },
@@ -174,6 +174,12 @@ window.__ModuleLoader__.load({
             'body [data-composer-card] {',
             '  -webkit-backdrop-filter: blur(18px) saturate(1.15);',
             '  backdrop-filter: blur(18px) saturate(1.15);',
+            '}',
+            // Frosted left sidebar (Windows/Linux; macOS keeps its native
+            // vibrancy). The class substring survives CSS-module hashing.
+            'html:not([data-platform="darwin"]) [class*="sidebarCol"] {',
+            '  -webkit-backdrop-filter: blur(24px) saturate(1.25);',
+            '  backdrop-filter: blur(24px) saturate(1.25);',
             '}',
           ].join('\n');
           document.head.appendChild(style);
