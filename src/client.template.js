@@ -176,10 +176,24 @@ window.__ModuleLoader__.load({
             '  backdrop-filter: blur(18px) saturate(1.15);',
             '}',
             // Frosted left sidebar (Windows/Linux; macOS keeps its native
-            // vibrancy). The class substring survives CSS-module hashing.
+            // vibrancy). The blur rides a pseudo-element: putting
+            // backdrop-filter on the column itself would make it the containing
+            // block for the fixed-position sidebar toggle and shift it.
             'html:not([data-platform="darwin"]) [class*="sidebarCol"] {',
+            '  position: relative;',
+            '}',
+            'html:not([data-platform="darwin"]) [class*="sidebarCol"]::before {',
+            '  content: "";',
+            '  position: absolute;',
+            '  inset: 0;',
+            '  pointer-events: none;',
             '  -webkit-backdrop-filter: blur(24px) saturate(1.25);',
             '  backdrop-filter: blur(24px) saturate(1.25);',
+            '}',
+            // Frosted Windows caption strip (the frame paints it as ::before).
+            'html[data-windows-titlebar] [class*="frame"]::before {',
+            '  -webkit-backdrop-filter: blur(18px) saturate(1.2);',
+            '  backdrop-filter: blur(18px) saturate(1.2);',
             '}',
           ].join('\n');
           document.head.appendChild(style);
