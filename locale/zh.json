@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "MERA 主题 · Mermaid 拟人",
-    "description": "应用 MERA 拟人人设（Mermaid.js 拟人「玫拉」）的专属配色：玫红 #FF3670 × 珍珠白 × 墨蓝 #111827。浅色外观使用「白天晴朗」壁纸，深色外观使用「雨夜 NIGHTCODE」壁纸，面板半透明让壁纸透出。与浅色 / 深色 / 跟随系统三种外观完全兼容；停用插件即可恢复内置样式。",
+    "description": "应用 MERA 拟人人设（Mermaid.js 拟人「玫拉」）的专属配色：玫红 #FF3670 × 珍珠白 × 墨蓝 #111827。浅色外观使用「白天晴朗」壁纸，深色外观使用「雨夜 NIGHTCODE」壁纸，面板半透明让壁纸透出。Windows 下会在数秒内跟随系统应用模式（含 PowerToys 自动切换）；macOS 保持原生切换。停用插件即可恢复内置样式。",
     "detail": "docs/DETAIL.zh.md"
   }
 }

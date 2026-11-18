@@ -14,6 +14,7 @@ A DeepSeek Harness **theme plugin** based on the anthropomorphic persona **MERA*
 - **Wallpapers**: light appearance gets the **「白天晴朗」sunny day** wallpaper, dark gets the **「雨夜 NIGHTCODE」rainy night** one; panels turn translucent so the artwork shows through behind the UI
 - Paints **MERA light「珍珠白 · 工作台」** and **MERA dark「墨蓝 · 夜间编译」** over the built-in palettes
 - Works with every **Appearance** choice — Light, Dark, and System keep working (OS scheme flips included); the MERA look re-applies on every load
+- **Windows**: follows the OS app mode even when the Electron shell misses a live theme change — the Host reads `AppsUseLightTheme` and the client polls it, so PowerToys' scheduled **Light switch** is picked up within a few seconds. macOS and other platforms keep their native switching (no Host probe, no client sync)
 - Touches surfaces, brand accents, sidebar, chat bubbles, code blocks, menus, charts, scrollbars and illustration layers via `--dsw-*` alias-token overrides — no layout changes, no external resources
 - Disable the plugin in **Plugins** and the built-in colors come right back
 

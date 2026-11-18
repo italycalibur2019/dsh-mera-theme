@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "MERA theme · Diagram Mermaid",
-    "description": "Applies the MERA persona palette (the Mermaid.js gijinka 'MERA'): raspberry rose #FF3670, pearl white, and ink navy #111827. Light appearance gets the sunny-day wallpaper, dark gets the rainy-night one; surfaces turn translucent so the artwork shows through. Compatible with the Light, Dark, and System appearance choices; turning the plugin off restores the built-in look.",
+    "description": "Applies the MERA persona palette (the Mermaid.js gijinka 'MERA'): raspberry rose #FF3670, pearl white, and ink navy #111827. Light appearance gets the sunny-day wallpaper, dark gets the rainy-night one; surfaces turn translucent so the artwork shows through. On Windows it follows the OS app mode within seconds (PowerToys' light switch included); macOS keeps native switching. Turning the plugin off restores the built-in look.",
     "detail": "docs/DETAIL.md"
   }
 }

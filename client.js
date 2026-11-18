@@ -121,6 +121,18 @@ window.__ModuleLoader__.load({
         // (run on plugin disable) restores the built-in palette.
         ctx.effect(() => ctx.theme.overrideTokens('dsh-mera-theme', MERA_TOKENS), 'mera-theme: token layer');
 
+        // The OS-scheme sync below switches to these ids; setTheme refuses an
+        // unregistered id, so they exist even though all their color work rides
+        // the token layer above.
+        const meraLight = { id: 'mera-light', colorScheme: 'light', tokens: {} };
+        const meraDark = { id: 'mera-dark', colorScheme: 'dark', tokens: {} };
+        const disposeLight = ctx.theme.register(meraLight);
+        const disposeDark = ctx.theme.register(meraDark);
+        ctx.effect(() => () => {
+          disposeLight();
+          disposeDark();
+        }, 'mera-theme: registered themes');
+
         // Wallpaper backdrop: light「白天晴朗」for the light palette, rainy
         // night「雨夜 NIGHTCODE」for the dark palette (body[data-ds-dark-theme]).
         // Two paint paths on purpose: a body background-image (plain, no
@@ -175,6 +187,68 @@ window.__ModuleLoader__.load({
             style.remove();
           };
         }, 'mera-theme: wallpaper layer');
+
+        // Windows only: follow the OS app mode (PowerToys' light switch, or a
+        // manual Windows theme change) even when the Electron shell's
+        // prefers-color-scheme is stale. The Host exposes the registry value at
+        // /mera/os-scheme and injects __MERA_HOST__ on Windows only; macOS and
+        // every other platform never see that origin, so their native
+        // light/dark switching is untouched.
+        ctx.effect(() => {
+          if (typeof window === 'undefined' || typeof fetch !== 'function') return undefined;
+          if (!/Windows/i.test(navigator.userAgent)) return undefined;
+          const hostOrigin = typeof window.__MERA_HOST__ === 'string' && window.__MERA_HOST__ !== ''
+            ? window.__MERA_HOST__
+            : (typeof location !== 'undefined' && location.protocol.startsWith('http') ? location.origin : undefined);
+          if (hostOrigin === undefined) return undefined;
+
+          // 'system' = follow the OS; 'light'/'dark' = the user picked one, so
+          // the watcher stands down until they pick "follow system" again.
+          let intent = 'system';
+          let stopped = false;
+
+          const applyScheme = (scheme) => {
+            const current = ctx.theme.getTheme();
+            const id = current.active.id;
+            // Leave a foreign theme (e.g. catppuccin) alone; it owns the palette.
+            if (id !== 'light' && id !== 'dark' && id.lastIndexOf('mera-', 0) !== 0) return;
+            if (current.active.colorScheme === scheme) return;
+            // Third-party ids stay in memory, so the durable preference (system
+            // included) is never rewritten by this sync.
+            ctx.theme.setTheme('mera-' + scheme);
+          };
+
+          const poll = async () => {
+            if (stopped || intent !== 'system') return;
+            try {
+              const response = await fetch(hostOrigin + '/mera/os-scheme', { cache: 'no-store', credentials: 'omit' });
+              if (!response.ok) return;
+              const body = await response.json();
+              if (body.scheme === 'light' || body.scheme === 'dark') applyScheme(body.scheme);
+            } catch { /* host unreachable in this window; retry on the next tick */ }
+          };
+
+          const onThemeChange = (snapshot) => {
+            const preference = snapshot.preference;
+            if (preference !== 'light' && preference !== 'dark' && preference !== 'system') return;
+            intent = preference;
+            if (preference === 'system') void poll();
+          };
+          ctx.on('theme/change', onThemeChange);
+
+          const current = ctx.theme.getTheme();
+          if (current.preference === 'light' || current.preference === 'dark') intent = current.preference;
+
+          void poll();
+          const timer = window.setInterval(() => { void poll(); }, 6000);
+          const onVisible = () => { if (document.visibilityState === 'visible') void poll(); };
+          document.addEventListener('visibilitychange', onVisible);
+          return () => {
+            stopped = true;
+            window.clearInterval(timer);
+            document.removeEventListener('visibilitychange', onVisible);
+          };
+        }, 'mera-theme: os-scheme sync');
       },
     };
   },
