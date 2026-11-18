@@ -58,8 +58,12 @@ window.__ModuleLoader__.load({
       '--dsw-alias-label-deep-diving-shimmer': { light: 'color-mix(in srgb, #FF3670 30%, #4A0D22)', dark: 'color-mix(in srgb, #FF7AA0 65%, #FFC2D6)' },
       // Ink: light uses navy, dark uses pearl white
       '--dsw-alias-label-primary': { light: '#111827', dark: '#F2F5FB' },
-      '--dsw-alias-label-secondary': { light: '#566074', dark: '#AEB8CB' },
-      '--dsw-alias-label-tertiary': { light: '#6B7280', dark: '#8792A6' },
+      '--dsw-alias-label-secondary': { light: '#4A5468', dark: '#AEB8CB' },
+      // Tertiary carries the small step labels ("分析" etc.) directly on the
+      // translucent chat canvas: light mode needs a darker gray to stay legible
+      // over the bright wallpaper.
+      '--dsw-alias-label-tertiary': { light: '#4B5563', dark: '#8792A6' },
+      '--dsw-alias-label-caption': { light: '#6B7280', dark: '#8792A6' },
       '--dsw-alias-label-primary-bluish': { light: '#16233F', dark: '#DCE6FA' },
       '--dsw-alias-menu-icon': { light: '#3A4358', dark: '#C3CCDC' },
       // Borders and interaction
