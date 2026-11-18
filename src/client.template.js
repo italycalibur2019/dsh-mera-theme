@@ -180,14 +180,19 @@ window.__ModuleLoader__.load({
             // vibrancy sits behind it and is unaffected). The blur rides a
             // pseudo-element: putting backdrop-filter on the column itself
             // would make it the containing block for the fixed-position
-            // sidebar toggle and shift it.
+            // sidebar toggle and shift it. The layer sits at z-index -1 above
+            // the column's own background but below every child, so in-flow
+            // content (e.g. a third-party plugin's small icon) is never
+            // painted into the blurred backdrop.
             '[class*="sidebarCol"] {',
             '  position: relative;',
+            '  isolation: isolate;',
             '}',
             '[class*="sidebarCol"]::before {',
             '  content: "";',
             '  position: absolute;',
             '  inset: 0;',
+            '  z-index: -1;',
             '  pointer-events: none;',
             '  -webkit-backdrop-filter: blur(24px) saturate(1.25);',
             '  backdrop-filter: blur(24px) saturate(1.25);',
