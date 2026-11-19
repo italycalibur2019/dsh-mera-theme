@@ -197,6 +197,22 @@ window.__ModuleLoader__.load({
             '  -webkit-backdrop-filter: blur(24px) saturate(1.25);',
             '  backdrop-filter: blur(24px) saturate(1.25);',
             '}',
+            // The same frost for the right column: macOS paints its own
+            // bg-base veil there but no blur, so the wallpaper read sharp
+            // behind the right panels on that platform only.
+            '[class*="rightbarCol"] {',
+            '  position: relative;',
+            '  isolation: isolate;',
+            '}',
+            '[class*="rightbarCol"]::before {',
+            '  content: "";',
+            '  position: absolute;',
+            '  inset: 0;',
+            '  z-index: -1;',
+            '  pointer-events: none;',
+            '  -webkit-backdrop-filter: blur(24px) saturate(1.25);',
+            '  backdrop-filter: blur(24px) saturate(1.25);',
+            '}',
             // Frosted Windows caption strip (the frame paints it as ::before;
             // macOS has no page-painted caption row).
             'html[data-windows-titlebar] [class*="frame"]::before {',
