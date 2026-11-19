@@ -229,10 +229,13 @@ window.__ModuleLoader__.load({
         ctx.effect(() => {
           if (typeof window === 'undefined' || typeof fetch !== 'function') return undefined;
           if (!/Windows/i.test(navigator.userAgent)) return undefined;
-          const hostOrigin = typeof window.__MERA_HOST__ === 'string' && window.__MERA_HOST__ !== ''
-            ? window.__MERA_HOST__
-            : (typeof location !== 'undefined' && location.protocol.startsWith('http') ? location.origin : undefined);
-          if (hostOrigin === undefined) return undefined;
+          if (typeof location === 'undefined') return undefined;
+          // Same-origin relative path: in the browser this is the Host's own
+          // origin; inside the Desktop shell it goes through dsh-app://, whose
+          // handler forwards the request with the session cookie. Both reach
+          // the route through the connection service's access check.
+          const token = new URLSearchParams(location.search).get('token');
+          const endpoint = '/mera/os-scheme' + (token === null ? '' : '?token=' + encodeURIComponent(token));
 
           // 'system' = follow the OS; 'light'/'dark' = the user picked one, so
           // the watcher stands down until they pick "follow system" again.
@@ -253,7 +256,7 @@ window.__ModuleLoader__.load({
           const poll = async () => {
             if (stopped || intent !== 'system') return;
             try {
-              const response = await fetch(hostOrigin + '/mera/os-scheme', { cache: 'no-store', credentials: 'omit' });
+              const response = await fetch(endpoint, { cache: 'no-store', credentials: 'same-origin' });
               if (!response.ok) return;
               const body = await response.json();
               if (body.scheme === 'light' || body.scheme === 'dark') applyScheme(body.scheme);

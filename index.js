@@ -3,6 +3,10 @@
  * client can follow PowerToys' automatic light switch (and any manual OS
  * theme change) even when the Electron shell does not re-read it while running.
  *
+ * The route goes through the connection service's access check — the same
+ * browser-token and same-origin fence every DSH API endpoint uses — so a page
+ * from another origin cannot read it.
+ *
  * Windows only: on macOS (and every other platform) this module registers no
  * route and injects nothing, so the native light/dark switching is untouched.
  */
@@ -32,7 +36,7 @@ async function readOsScheme() {
   }
 }
 
-/** Serve { platform, scheme } and let the client poll it. */
+/** Serve { platform, scheme } to the same-origin client page. */
 export function apply(ctx) {
   if (!WINDOWS) return
 
@@ -46,24 +50,23 @@ export function apply(ctx) {
     return cached
   }
 
-  ctx.on('webserver/index-inject', (table) => {
-    try {
-      table.push({ kind: 'global', name: '__MERA_HOST__', value: ctx.webServer.getOrigin() })
-    } catch {
-      // The listener has not bound yet; the page will simply poll nothing.
-    }
-  })
-
-  ctx.inject(['webServer'], (scope) => {
+  ctx.inject(['webServer', 'connection'], (scope) => {
     scope.effect(() => scope.webServer.register({
       kind: 'exact',
       path: '/mera/os-scheme',
-      handler: async (_req, res) => {
+      handler: async (req, res) => {
+        // Same fence as every DSH API endpoint: refuse cross-origin callers
+        // (403) and requests without a live browser token (401).
+        const refused = scope.connection.requestRejection(req)
+        if (refused !== undefined) {
+          res.writeHead(refused, { 'cache-control': 'no-store' })
+          res.end(refused === 401 ? 'unauthorized' : 'forbidden')
+          return
+        }
         const value = await scheme()
         res.writeHead(200, {
           'content-type': 'application/json',
           'cache-control': 'no-store',
-          'access-control-allow-origin': '*',
         })
         res.end(JSON.stringify({ platform: process.platform, scheme: value }))
       },
